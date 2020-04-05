@@ -41,8 +41,10 @@ const EditJobModal = () => {
     setPriority(e.target.value)
   };
   const handleUpdate = () => {
-    let editedJob = {...modalProps, newPriority: priority};
-    makeEdit(editedJob);
+    if(priority){
+      let editedJob = {...modalProps, newPriority: priority};
+      makeEdit(editedJob);
+    }
     modalSetStatus(false);
   };
 
