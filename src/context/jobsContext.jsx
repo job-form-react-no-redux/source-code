@@ -43,8 +43,6 @@ export default (props) => {
     });
   };
   const makeEdit = (j) => {
-
-    console.log(j)
     setJobsList((currentJobs) => {
       currentJobs[j.newPriority].unshift(j.job);
       makeDelete({job: j.job, priority: j.priority})
