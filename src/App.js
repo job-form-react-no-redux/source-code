@@ -1,13 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import JobDashboard from './pages/JobsDashboard';
+import JobDashboard from "./pages/JobsDashboard";
 
-function App() {
+import JobsProvider from "./context/jobsContext";
+import ModalProvider from "./context/modalContext";
+
+const App = () => {
   return (
     <div className="App">
-      <JobDashboard />
+      <JobsProvider>
+        <ModalProvider>
+        <JobDashboard />
+        </ModalProvider>
+      </JobsProvider>
     </div>
   );
-}
+};
 
 export default App;

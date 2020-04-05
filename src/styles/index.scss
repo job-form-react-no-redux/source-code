@@ -1,4 +1,9 @@
-@import './defaults.scss';
+@import './globals/vars.scss';
+@import './globals/defaults.scss';
+@import './globals/common.scss';
 
 @import './App.scss';
-@import './AddJobForm.scss';
+@import './components/AddJobForm.scss';
+@import './components/EditJobModal.scss';
+@import './components/job-table/JobsTable.scss';
+@import './components/job-table/JobsTableRow.scss';

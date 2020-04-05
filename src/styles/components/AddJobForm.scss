@@ -1,0 +1,17 @@
+.AddJobForm {
+  &__label {
+    display: block;
+  }
+  &__row {
+    margin: 0 0 20px;
+  }
+  &__error-message {
+    text-align: center;
+    color: red;
+    font-size: 12px;
+  }
+  &__no-error-message{
+    visibility: hidden;
+    font-size: 12px;
+  }
+}

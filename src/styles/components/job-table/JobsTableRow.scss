@@ -1,0 +1,32 @@
+.JobsTableRow {
+  display: flex;
+  justify-content: space-between;
+  &__name {
+    width: 40%;
+    padding: 0 5px;
+    padding: 20px 0 0 8px;
+  }
+  &__priority {
+    width: 30%;
+    text-align: center;
+    padding: 20px 0;
+  }
+  &__interactive {
+    width: 30%;
+    text-align: center;
+    padding: 20px 0;
+    button{
+        cursor: pointer;
+        margin: 0 4px;
+    }
+  }
+}
+.RowUrgent {
+  background-color: $row-urgent-color;
+}
+.RowRegular {
+  background-color: $row-regular-color;
+}
+.RowTrivial {
+  background-color: $row-trivial-color;
+}
