@@ -3,6 +3,7 @@
     text-align: right;
   }
   &__close-icon {
+    cursor: pointer;
     display: inline-block;
     width: 20px;
     color: $input-border-color;

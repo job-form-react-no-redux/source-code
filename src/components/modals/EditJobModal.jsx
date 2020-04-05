@@ -10,30 +10,25 @@ ReactModal.setAppElement("#root");
 
 const MODAL_STYLES = {
   overlay: {
-    // position: "fixed",
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.70)",
   },
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    minWidth: '500px',
-    minHeight: '200px',
-    padding: '10px 20px'
-  }
-}
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    minWidth: "500px",
+    minHeight: "200px",
+    padding: "10px 20px",
+  },
+};
 
 const EditJobModal = () => {
-
   const isModalOpen = useContext(ModalContext).isOpen;
   const modalProps = useContext(ModalContext).propsModal;
+
   const [priority, setPriority] = useState(modalProps?.priority);
 
   const modalSetStatus = useContext(ModalContext).setStatus;
@@ -46,7 +41,7 @@ const EditJobModal = () => {
     setPriority(e.target.value)
   };
   const handleUpdate = () => {
-    let editedJob = {...modalProps, priority: priority};
+    let editedJob = {...modalProps, newPriority: priority};
     makeEdit(editedJob);
     modalSetStatus(false);
   };
@@ -63,9 +58,10 @@ const EditJobModal = () => {
         </div>
         <div className="EditJobModal__header">
           <h4>{modalProps.job}</h4>
-          </div>
+        </div>
         <div className="EditJobModal__body">
         <PrioritySelect
+            reset={false}
             value={modalProps.priority}
             onSelectPriority={(e) => handleSelect(e)}
           />

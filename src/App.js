@@ -1,7 +1,6 @@
 import React from "react";
 
 import JobDashboard from "./pages/JobsDashboard";
-
 import JobsProvider from "./context/jobsContext";
 import ModalProvider from "./context/modalContext";
 

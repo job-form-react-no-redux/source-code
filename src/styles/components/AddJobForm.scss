@@ -7,7 +7,7 @@
   }
   &__error-message {
     text-align: center;
-    color: red;
+    color: $row-urgent-color;
     font-size: 12px;
   }
   &__no-error-message{

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import { saveJobsList, getJobsList } from "../utils/localStorage";
+import PRIORITIES_LIST from "../utils/constants";
+
 export const JobsContext = React.createContext({
   jobs: {},
   existingJob: null,
@@ -9,47 +12,50 @@ export const JobsContext = React.createContext({
 });
 
 export default (props) => {
-  const [jobsList, setJobsList] = useState({
-    test1: {
-      priority: "Urgent",
-    },
-    test2: {
-      priority: "Trivial",
-    },
-    test3: {
-      priority: "Urgent",
-    },
+  const [jobsList, setJobsList] = useState(() => {
+    let savedList = getJobsList();
+    let jobs = {};
+    if(savedList){
+      jobs = savedList
+    }else{
+      for (let priority in PRIORITIES_LIST) {
+        jobs[PRIORITIES_LIST[priority]] = [];
+      }
+    }
+    return jobs;
   });
-//   const [jobsList, setJobsList] = useState({});
+
   const [existingJob, setExistingJob] = useState(false);
 
-  const makeCreate = (job) => {
+  const makeCreate = (j) => {
     setJobsList((currentJobs) => {
-      if (currentJobs[job.job]) {
-        setExistingJob(true);
-        return currentJobs;
+      for (let priority in currentJobs) {
+        if (currentJobs[priority].includes(j.job)) {
+          setExistingJob(true);
+          return currentJobs;
+        }
       }
-      setExistingJob(false)
-      currentJobs[job.job] = { priority: job.priority };
+      setExistingJob(false);
+      currentJobs[j.priority].unshift(j.job);
       let result = { ...currentJobs };
-      //   console.log(result);
+      saveJobsList(result);
       return result;
     });
   };
-  const makeEdit = (job) => {
-      console.log(job)
-      setJobsList((currentJobs) => {
-          currentJobs[job.job] = {priority: job.priority};
-          let result = { ...currentJobs };
-          return result;
-      });
-  };
-  const makeDelete = (job) => {
+  const makeEdit = (j) => {
     setJobsList((currentJobs) => {
-      delete currentJobs[job];
-      //   console.log(job)
-      //   console.log(currentJobs)
+    currentJobs[j.newPriority].unshift(j.job);
+    makeDelete({job: j.job, priority: j.priority})
+    });
+  };
+  const makeDelete = (j) => {
+    setJobsList((currentJobs) => {
+      let indexToDelete = currentJobs[j.priority].indexOf(j.job);
+      if (indexToDelete >= 0) {
+        currentJobs[j.priority].splice(indexToDelete, 1);
+      }
       let updatedJobsList = { ...currentJobs };
+      saveJobsList(updatedJobsList);
       return updatedJobsList;
     });
   };

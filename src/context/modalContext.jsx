@@ -12,7 +12,6 @@ export default (props) => {
   const [modalProps, setModalProps] = useState({job: '', priority: ''});
 
   const makeSetStatus = (data) => {
-    console.log(data);
     setIsOpenStatus(() => {
       return data;
     });
